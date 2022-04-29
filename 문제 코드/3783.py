@@ -1,0 +1,2 @@
+import decimal;d = decimal.Decimal;decimal.getcontext().prec=1000
+for i in range(int(input())):n=d(input())**(d('1')/d('3'));n=round(n,400);n=d(n).quantize(d('.0000000001'),decimal.ROUND_DOWN);print(n)

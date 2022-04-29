@@ -1,0 +1,7 @@
+a = int(input())
+arr = list(map(int,input()))
+print(a * arr[2])
+print(a * arr[1])
+print(a * arr[0])
+sum = (a * arr[2]) + ((a * arr[1])*10) + ((a * arr[0])*100)
+print(sum)

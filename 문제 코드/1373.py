@@ -1,0 +1,1 @@
+a=input();a=int(a,8);a=format(a,'b');print(a)
