@@ -5,7 +5,6 @@ def fail(pt):
     lp=len(pt)
     t=[0]*lp
     i=0
-
     for j in range(1,lp):
         while i>0 and pt[i]!=pt[j]:
             i=t[i-1]
@@ -13,7 +12,6 @@ def fail(pt):
             i+=1
             t[j]=i
     return t
-
 
 l = int(input())
 s = input().rstrip()
