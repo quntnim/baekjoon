@@ -1,0 +1,1 @@
+for c in range(int(input())):print("Case #{0}: {1}".format(c+1,max(list(map(int,input().split())))))
