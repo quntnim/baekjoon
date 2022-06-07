@@ -1,5 +1,8 @@
 from math import gcd
 from random import *
+from itertools import combinations
+import sys
+input = sys.stdin.readline
 
 def is_prime(n):
     def miller_rabin(n,b):
@@ -52,11 +55,34 @@ def pollard_rho(n):
 
 def euler(n):
     res=n
-    for p in range(2,int(n**0.5)+1):
-        if n % p == 0:
-            while n % p == 0:
-                n //= p
-            res *= 1 - (1/p)
+    i = 2
+    while i ** 2 <= n:
+        if n % i == 0:
+            res *= 1 - (1/i)
+            while n % i == 0:
+                n //= i
+        i += 1
     if n > 1:
         res *= 1 - (1/n)
     return res
+
+n = int(input())
+n2 = n
+arr = []
+while n!=1:
+    a = pollard_rho(n)
+    arr.append(a)
+    n//=a
+
+res = n2
+arr = list(set(arr))
+for i in range(1,len(arr)+1):
+    temp = combinations(arr,i)
+    for j in temp:
+        x = 1
+        for idx in j:
+            x *= idx
+        if i%2:res-=(n2//x)
+        else:res+=(n2//x)
+
+print(res)
