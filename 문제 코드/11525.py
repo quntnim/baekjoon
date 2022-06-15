@@ -15,8 +15,8 @@ def euler(n):
 arr = [0]*10001
 temp = 1
 for _ in range(int(input())):
-    n=int(input())
-    for i in range(temp,n+1):
+    n,m=map(int,input().split())
+    for i in range(temp,m+1):
         arr[i] = arr[i-1]+round(euler(i))
-    temp = n
-    print(arr[n]+1)
+    temp = m
+    print('{0} {1}'.format(n,arr[m]+1))
