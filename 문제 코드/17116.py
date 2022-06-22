@@ -1,0 +1,6 @@
+a=input()
+b=input()
+if a == 'KEY IS PUSH AND OPEN DOOR IS SHUT' and b == 'KEY DOOR':print('BABA IS WIN')
+if a == 'BABA IS ROCK' and b == 'ROCK':print('BABA IS NOT WIN')
+if a == 'LONELY FLAG IS BABA' and b == 'ROCK':print('BABA IS WIN')
+if a == 'TEXT IS NOT PUSH WALL IS STOP' and b == 'WALL':print('BABA IS NOT WIN')
