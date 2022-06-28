@@ -1,6 +1,8 @@
 n = int(input())
-base = int(input())
-arr=[]
+now = int(input())
+temp = 0
 for i in range(n):
-    t = int(input())
-    if base < i
+    des = int(input())
+    temp += min(abs(now-des),360-now+des,now-des+360)
+    now = des
+print(temp)
