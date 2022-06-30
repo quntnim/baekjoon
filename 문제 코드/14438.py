@@ -1,11 +1,8 @@
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(10**6)
 
-n,m = map(int,input().split())
-arr = []
-for i in range(n):
-    arr.append(int(input()))
+n = int(input())
+arr = list(map(int,input().split()))
 tree = [0] * (len(arr)*4)
 
 def segtree(start,end,idx):
@@ -24,14 +21,29 @@ def isum(start,end,idx,left,right):
     if left > end or right < start: return 10**9+1
     if left <= start and right >= end: return tree[idx]
     mid = (start + end) // 2
-
+   
     l = isum(start,mid,idx*2,left,right)
     r = isum(mid+1,end,idx*2+1,left,right)
-
     return min(l,r)
+
+def rewrite(start,end,idx,node,val):
+    if node < start or node > end:
+        return tree[idx]
+    tree[idx] += val
+    if start != end:
+        mid = (start + end) // 2
+        l = rewrite(start,mid,idx*2,node,val)
+        r = rewrite(mid+1,end,idx*2+1,node,val)
+        tree[idx] = min(l,r)
+    return tree[idx]
 
 segtree(0, len(arr) - 1, 1)
 
-for _ in range(m):
-    a,b= map(int,input().split())
-    print(isum(0,len(arr)-1,1,a-1,b-1))
+for _ in range(int(input())):
+    a,b,c = map(int,input().rstrip().split())
+    if a == 1:
+        diff = c - arr[b-1]
+        arr[b-1] = c
+        rewrite(0,len(arr) - 1,1,b-1,diff)
+    if a == 2:
+        print(isum(0,len(arr) - 1,1,b-1,c-1))
