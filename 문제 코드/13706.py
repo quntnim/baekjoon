@@ -1,3 +1,3 @@
-from bisect import *
+from math import *
 n = int(input())
-print(bisect_left(1,n))
+print(isqrt(n))
