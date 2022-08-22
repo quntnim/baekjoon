@@ -1,0 +1,1 @@
+for _ in range(int(input())):i,a,b,c = map(int,input().split());print(i,a+b+c,'PASS'if a>=10.5 and b>=7.5 and c>=12 and a+b+c>=55 else'FAIL')
