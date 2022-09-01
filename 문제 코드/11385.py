@@ -1,8 +1,11 @@
 import sys
 input = sys.stdin.readline
 
-p = 998244353
-def fft(a, inv=False):
+p1 = 998244353
+p2 = 2281701377
+i1 = 253522377
+i2 = -110916040
+def fft(a, p, inv=False):
     n = len(a)
     j = 0
     for i in range(1,n):
@@ -35,40 +38,30 @@ def fft(a, inv=False):
         for i in range(n):
             a[i] = (a[i] * invn)%p
 
-def fft_conv(a,b):
+def fft_conv(a,b,p):
     s = len(a) + len(b) - 1
     n = 1 << s.bit_length()
     a += [0 for _ in range(n - len(a))]
     b += [0 for _ in range(n - len(b))]
-    fft(a); fft(b)
+    c = [0 for _ in range(n)]
+    fft(a,p);fft(b,p)
     for i in range(n):
-        a[i] *= b[i]
-    fft(a,True)
-    return a
+        c[i] = a[i] * b[i]
+    fft(c,p,True)
+    return c[:s]
 
-def fft_sconv(a):
-    s = len(a) + len(a) - 1
-    n = 1 << s.bit_length()
-    a += [0 for _ in range(n - len(a))]
-    fft(a)
-    for i in range(n):
-        a[i] *= a[i]
-    fft(a,True)
-    return a
+def crt(x, y):
+    return (x*p2*i2+y*p1*i1)%(p1*p2)
 
-n,k = map(int,input().split())
-temp = list(map(int,input().split()))
+n,m = map(int,input().split())
+a = list(map(int,input().split()))
+b = list(map(int,input().split()))
 
-arr = [0]*(max(temp)*2+1)
-for i in temp:
-    arr[i] = 1
-
-res = [1]
-while k > 0:
-    if k%2 == 1: 
-        res = fft_conv(res, arr)
-    arr = fft_sconv(arr)
-    k//=2
+res = 0
+conv = fft_conv(a,b,p1)
+fft(a,p1,True)
+fft(b,p1,True)
+conv2 = fft_conv(a,b,p2)[:n -~ m]
+for i,j in zip(conv,conv2):
+    res ^= crt(i,j)
 print(res)
-for i in range(len(res)):
-    if res[i]:print(i)
