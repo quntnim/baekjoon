@@ -1,9 +1,9 @@
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(10**6)
+sys.setrecursionlimit(10**3)
 n,m,r = map(int,input().split())
 
-arr = [[] for _ in range(n)]
+arr = [[] for _ in range(n+1)]
 visit = [False]*(n+1)
 for i in range(m):
     a,b = map(int,input().split())
