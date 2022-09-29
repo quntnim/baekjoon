@@ -14,4 +14,4 @@ def bs(a, t):
 
 input();m=list(map(int,input().split()))
 for i in m:
-    print(bs(n, i))
+    print(bs(n, i),end = ' ')
