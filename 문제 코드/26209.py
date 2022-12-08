@@ -1,0 +1,1 @@
+print('SF'['9'in open(0).read()])

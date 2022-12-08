@@ -1,8 +1,8 @@
 import sys
+import math
 input = sys.stdin.readline
 
 p = 469762049
-mod = 100003
 def fft(a, inv=False):
     n = len(a)
     j = 0
@@ -36,15 +36,20 @@ def fft(a, inv=False):
         for i in range(n):
             a[i] = (a[i] * invn)%p
 
-def fft_conv(a, b):
-    s = len(a) + len(b) - 1
+def fft_conv(a):
+    s = len(a) + len(a) - 1
     n = 1 << s.bit_length()
     a += [0 for _ in range(n - len(a))]
-    b += [0 for _ in range(n - len(b))]
-    fft(a);fft(b)
+    fft(a)
     for i in range(n):
-        a[i] *= b[i]
+        a[i] *= a[i]
     fft(a,True)
     return a
 
 n = int(input())
+a = [0]*n
+for i in range(1,n+1):
+    a[i*i%n]+=1
+print(a)
+res = fft_conv(a)
+print(res)

@@ -1,3 +1,4 @@
+import numpy as pd
 arr = []
 for i in range(5):
     arr.append(int(input()))

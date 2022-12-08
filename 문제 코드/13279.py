@@ -2,6 +2,7 @@ import sys
 input = sys.stdin.readline
 
 p = 469762049
+mod = 100003
 def fft(a, inv=False):
     n = len(a)
     j = 0
@@ -46,9 +47,9 @@ def fft_conv(a, b):
     fft(a,True)
     return a
 
-def dac(arr,l,r):
-    if l == r: return arr[l]
-    return fft_conv(dac(arr,l,(l+r)//2), dac(arr,(l+r)//2+1,r))
+def divide_and_conquer(arr,l,r):
+    if l == r-1: return arr[l]
+    return fft_conv(divide_and_conquer(arr,l,(l+r)//2), divide_and_conquer(arr,(l+r)//2,r))
 
 n = int(input())
 
@@ -57,7 +58,7 @@ temp = list(map(int,input().rsplit()))
 for i in range(n):
     arr[i] = [temp[i],1]
 
-res = dac(arr,0,n-1)
+res = divide_and_conquer(arr,0,n)
 for i in range(int(input())):
     q = int(input())
-    print(res[n-q]%100003)
+    print(res[n-q]%mod)

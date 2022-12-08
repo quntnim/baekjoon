@@ -2,7 +2,7 @@ import sys
 import math
 input = sys.stdin.readline
 
-p = 998244353
+p = 469762049
 def fft(a, inv=False):
     n = len(a)
     j = 0
@@ -47,18 +47,7 @@ def fft_conv(a, b):
     fft(a,True)
     return a
 
-def dnc_power(a,b):
-    if b == 0:
-        return a
-    t = dnc_power(a,b//2)
-    if b % 2 == 1:  
-        return fft_conv(t,t)
-    else:
-        return fft_conv(fft_conv(t,t),a)
-
-n,k = map(int,input().split())
-a = list(map(int,input().split()))
-ar = [0 for i in range(max(a)+1)]
-for i in a:
-    ar[i] += 1
-print(dnc_power(ar,k))``
+s = list(map(int,input().replace('\n','')))
+t = list(map(int,input().replace('\n','')))
+res = fft_conv(s,t)
+print(max(res))

@@ -2,7 +2,7 @@ import sys
 import math
 input = sys.stdin.readline
 
-p = 998244353
+p = 469762049
 def fft(a, inv=False):
     n = len(a)
     j = 0
@@ -47,18 +47,22 @@ def fft_conv(a, b):
     fft(a,True)
     return a
 
-def dnc_power(a,b):
-    if b == 0:
-        return a
-    t = dnc_power(a,b//2)
-    if b % 2 == 1:  
-        return fft_conv(t,t)
-    else:
-        return fft_conv(fft_conv(t,t),a)
+hole = [0 for i in range(60001)]
+mid = [0 for i in range(60001)]
+lower = [0 for i in range(60001)]
 
-n,k = map(int,input().split())
-a = list(map(int,input().split()))
-ar = [0 for i in range(max(a)+1)]
-for i in a:
-    ar[i] += 1
-print(dnc_power(ar,k))``
+input()
+for i in list(map(int,input().split())):
+    hole[i+30000] += 1
+input()
+for i in list(map(int,input().split())):
+    mid[i+30000] += 1
+input()
+for i in list(map(int,input().split())):
+    lower[i+30000] += 1
+
+temp = fft_conv(hole,lower)
+res = 0
+for i in range(60000):
+    res += temp[i*2] * mid[i]
+print(res)

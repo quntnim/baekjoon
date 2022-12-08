@@ -1,0 +1,5 @@
+x,k = map(int,input().split())
+if x >= k*7:print(k*7*1000)
+elif x >= k*3.5:print(int(k*3.5*1000))
+elif x >= k*1.75:print(int(k*1.75*1000))
+else:print(0)
