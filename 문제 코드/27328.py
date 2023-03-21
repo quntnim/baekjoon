@@ -1,0 +1,1 @@
+print(1 if(a:=int(input()))>(b:=int(input()))else -1 if a<b else 0)

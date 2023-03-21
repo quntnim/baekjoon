@@ -1,16 +1,13 @@
-input();n=list(map(int,input().split()))
-n.sort()
-
-def bs(a, t):
-    start = 0
-    end = len(a) - 1
-    while start <= end:
-        mid = (start+end) // 2
-        if t == a[mid]:return 1
-        elif t > a[mid]:start = mid + 1
-        else:end = mid - 1
-    return 0
-
-input();m=list(map(int,input().split()))
-for i in m:
-    print(bs(n, i),end = ' ')
+from bisect import bisect_left, bisect_right
+n=int(input())
+arr=list(map(int,input().split())) + [10000001]
+arr.sort()
+m=int(input())
+arr2=list(map(int,input().split()))
+for i in arr2:
+    cnt = 0
+    t = bisect_left(arr,i)
+    if arr[t] == i:
+        print(bisect_right(arr,i) - t,end=' ')
+    else:
+        print(0,end=' ')

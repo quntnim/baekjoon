@@ -1,0 +1,1 @@
+print(__import__('math').prod(map(int,[*open(0)])))

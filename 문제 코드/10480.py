@@ -1,0 +1,1 @@
+for i in range(int(input())):print(f'{(a:=int(input()))} is','eovdedn'[a%2::2])

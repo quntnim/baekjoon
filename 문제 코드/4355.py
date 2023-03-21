@@ -1,5 +1,6 @@
 def euler(n):
     res=n
+    if n == 1:return 0
     for p in range(2,int(n**0.5)+1):
         if n % p == 0:
             while n % p == 0:
