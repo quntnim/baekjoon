@@ -1,0 +1,1 @@
+print('Overweight'if(bmi:=float(input())/(float(input())**2))>25 else'Underweight'if bmi<18.5 else'Normal weight')

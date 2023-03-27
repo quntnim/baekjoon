@@ -1,0 +1,1 @@
+print(f"The largest square has side length {int(__import__('math').sqrt(int(input())))}.")
